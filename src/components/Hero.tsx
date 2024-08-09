@@ -1,16 +1,19 @@
 import { movieTrailer, nowplaying, options } from '@/lib/constant';
 
 const getNowPlaying = async () => {
-  const randomIndex = Math.floor(Math.random() * 5) + 1;
+  const randomIndex = Math.floor(Math.random() * 10) + 1;
   const data = await fetch(`${nowplaying}`, options);
   const jsonData = await data.json();
   const id = jsonData.results[randomIndex].id;
-  const trailer = await fetch(`${movieTrailer}/${id}/videos`, options);
+  const trailer = await fetch(`${movieTrailer}/${id}/videos`, {
+    ...options,
+    cache: 'no-store',
+  });
   const trailerData = await trailer.json();
   const trailers = trailerData.results.filter(
     (item: any) => item.type === 'Trailer'
   );
-  console.log(trailers[0], 'tr');
+  //   console.log(trailers[0], 'tr');
   return trailers[0];
 };
 const Hero = async () => {
