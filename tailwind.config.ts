@@ -12,7 +12,7 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: '1.2rem',
+      padding: '15px',
     },
     screens: {
       sm: '640px',
@@ -24,9 +24,6 @@ const config = {
       primary: 'var(--font-poppins)',
     },
     extend: {
-      colors: {
-        primary: '#f5f5f0',
-      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -40,6 +37,10 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      colors: {
+        primary: '#f2f2e9',
+        secondary: '#032541',
       },
     },
   },

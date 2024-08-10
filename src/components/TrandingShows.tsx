@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Carosol from './Carosol';
-import { options, tranding } from '@/lib/constant';
+import { options, trandingseries } from '@/lib/constant';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 
 interface Movie {
@@ -21,13 +21,13 @@ interface Movie {
   vote_count: number;
 }
 
-const Tranding = () => {
+const TrandingShows = () => {
   const [based, setBased] = useState<string>('day');
   const [data, setData] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${tranding}${based}`, options);
+      const response = await fetch(`${trandingseries}${based}`, options);
       const result = await response.json();
       setData(result.results);
     };
@@ -37,9 +37,9 @@ const Tranding = () => {
 
   return (
     <>
-      <div className='flex items-center justify-start gap-10 py-12'>
+      <div className='flex items-center justify-start gap-10 py-10'>
         <h1 className='text-white text-left font-bold text-4xl'>
-          Trending Movies
+          Trending TV Shows
         </h1>
         <Tabs value={based} onValueChange={(value) => setBased(value)}>
           <TabsList className='flex gap-5 justify-start'>
@@ -65,4 +65,4 @@ const Tranding = () => {
   );
 };
 
-export default Tranding;
+export default TrandingShows;

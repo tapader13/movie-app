@@ -8,3 +8,9 @@ export const options = {
 };
 export const nowplaying = 'https://api.themoviedb.org/3/movie/now_playing';
 export const movieTrailer = 'https://api.themoviedb.org/3/movie/';
+export const popular = 'https://api.themoviedb.org/3/movie/popular';
+export const toprated = 'https://api.themoviedb.org/3/movie/top_rated';
+export const tranding = 'https://api.themoviedb.org/3/trending/movie/';
+export const trandingseries = 'https://api.themoviedb.org/3/trending/tv/';
+export const airingToday = 'https://api.themoviedb.org/3/tv/airing_today';
+export const movieDetails = 'https://api.themoviedb.org/3/movie/';

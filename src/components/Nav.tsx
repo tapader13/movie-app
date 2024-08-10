@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Nav = () => {
   return (
-    <div className='   py-5 bg-[#032541]/75'>
+    <div className=' fixed left-0 right-0  py-5 bg-[#032541]/75'>
       <div className='flex max-w-[1200px] justify-between mx-auto'>
         <div>
           <Link href={'/'}>
