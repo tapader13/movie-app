@@ -14,3 +14,5 @@ export const tranding = 'https://api.themoviedb.org/3/trending/movie/';
 export const trandingseries = 'https://api.themoviedb.org/3/trending/tv/';
 export const airingToday = 'https://api.themoviedb.org/3/tv/airing_today';
 export const movieDetails = 'https://api.themoviedb.org/3/movie/';
+export const images = 'https://api.themoviedb.org/3/movie/';
+export const Review = 'https://api.themoviedb.org/3/movie/';

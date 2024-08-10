@@ -2,6 +2,7 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Image from 'next/image';
+import Link from 'next/link';
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -45,21 +46,23 @@ const Carosol = ({ data }: CarosolProps) => {
     <div className=' w-full'>
       <Carousel responsive={responsive}>
         {data.map((movie: Movie) => (
-          <div key={movie.id} className='w-56 flex-shrink-0 mx-2'>
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${
-                movie.poster_path || movie.backdrop_path
-              }`}
-              alt={movie.title}
-              width={100}
-              height={100}
-              className='w-full h-64 object-cover rounded-md'
-            />
-            <h2 className='text-white  text-xl font-bold my-2'>
-              {movie.title}
-            </h2>
-            <p className='text-white/50 text-sm'>{movie.release_date}</p>
-          </div>
+          <Link href={`/moviedetails/${movie.id}`} key={movie.id}>
+            <div className='w-56 flex-shrink-0 cursor-pointer mx-2'>
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${
+                  movie.poster_path || movie.backdrop_path
+                }`}
+                alt={movie.title}
+                width={100}
+                height={100}
+                className='w-full h-64 object-cover rounded-md'
+              />
+              <h2 className='text-white  text-xl font-bold my-2'>
+                {movie.title}
+              </h2>
+              <p className='text-white/50 text-sm'>{movie.release_date}</p>
+            </div>
+          </Link>
         ))}
       </Carousel>
     </div>

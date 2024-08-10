@@ -2,7 +2,7 @@ import { options, airingToday } from '@/lib/constant';
 import React from 'react';
 import Carosol from './Carosol';
 
-interface Movie {
+export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

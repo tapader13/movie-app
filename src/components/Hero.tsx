@@ -45,7 +45,7 @@ const Hero = async () => {
               allowFullScreen
             ></iframe>
           )}
-          <div className=' text-white absolute left-24 bottom-40 '>
+          <div className=' text-white z-10 absolute left-24 bottom-40 '>
             <h1 className='text-2xl font-bold'>{data.original_title}</h1>
             <p className='w-2/5'>{data.overview}</p>
           </div>
