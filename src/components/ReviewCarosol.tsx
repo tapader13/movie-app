@@ -43,7 +43,7 @@ interface CarosolProps {
 const ReviewCarosol = ({ data }: CarosolProps) => {
   console.log(data, 'cr');
   return (
-    <div className=' w-full'>
+    <div className=' w-full '>
       {data.length > 0 ? (
         <Carousel
           responsive={responsive}

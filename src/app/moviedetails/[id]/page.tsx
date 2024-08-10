@@ -1,5 +1,13 @@
+import Carosol from '@/components/Carosol';
 import ReviewCarosol from '@/components/ReviewCarosol';
-import { images, movieDetails, options, Review } from '@/lib/constant';
+import {
+  images,
+  movieDetails,
+  options,
+  recomandations,
+  Review,
+  similar,
+} from '@/lib/constant';
 import Image from 'next/image';
 import React from 'react';
 
@@ -22,11 +30,22 @@ const getReview = async (id: number) => {
   const jsonData = await data.json();
   return jsonData;
 };
+const getSimilar = async (id: number) => {
+  const data = await fetch(`${similar}${id}/similar`, options);
+  const jsonData = await data.json();
+  return jsonData.results;
+};
+const getRecomandations = async (id: number) => {
+  const data = await fetch(`${recomandations}${id}/recommendations`, options);
+  const jsonData = await data.json();
+  return jsonData.results;
+};
 const MovieDetails = async ({ params }: any) => {
   const data = await getMovieDetails(params.id);
   const images = await getImages(params.id);
   const reviews = await getReview(params.id);
-  console.log(reviews.results, 'r');
+  const similar = await getSimilar(params.id);
+  const recomandations = await getRecomandations(params.id);
   return (
     <div>
       <div className='flex flex-row items-start pt-28 container'>
@@ -85,6 +104,18 @@ const MovieDetails = async ({ params }: any) => {
                 ))
             : 'No image available'}
         </div>
+      </div>
+      <div className=' bg-black mt-3'>
+        <h1 className='text-white text-left font-bold text-4xl py-12'>
+          Similar
+        </h1>
+        <Carosol data={similar} />
+      </div>
+      <div className=' bg-black'>
+        <h1 className='text-white text-left font-bold text-4xl pb-12'>
+          Recomandations
+        </h1>
+        <Carosol data={recomandations} />
       </div>
     </div>
   );

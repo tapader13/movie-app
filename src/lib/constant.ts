@@ -16,3 +16,6 @@ export const airingToday = 'https://api.themoviedb.org/3/tv/airing_today';
 export const movieDetails = 'https://api.themoviedb.org/3/movie/';
 export const images = 'https://api.themoviedb.org/3/movie/';
 export const Review = 'https://api.themoviedb.org/3/movie/';
+export const similar = 'https://api.themoviedb.org/3/movie/';
+export const recomandations = 'https://api.themoviedb.org/3/movie/';
+export const latest = 'https://api.themoviedb.org/3/movie/latest';
