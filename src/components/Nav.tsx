@@ -16,11 +16,11 @@ const Nav = () => {
           <Link className=' text-xl text-primary ' href={'/tvshows'}>
             TV Shows
           </Link>
-          <Link className=' text-xl text-primary ' href={'/people'}>
-            People
+          <Link className=' text-xl text-primary ' href={'/favoritemovies'}>
+            Favorite Movies
           </Link>
-          <Link className=' text-xl text-primary ' href={'/more'}>
-            More
+          <Link className=' text-xl text-primary ' href={'/login'}>
+            Login
           </Link>
         </div>
       </div>

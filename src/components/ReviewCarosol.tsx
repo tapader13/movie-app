@@ -44,15 +44,15 @@ const ReviewCarosol = ({ data }: CarosolProps) => {
   console.log(data, 'cr');
   return (
     <div className=' w-full '>
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         <Carousel
           responsive={responsive}
-          className='bg-slate-200 mt-2 rounded-lg'
+          className='bg-[#1c0c0b] text-white mt-2 rounded-lg'
         >
           {data.map((movie: Review, i: number) => (
             <div
               key={i}
-              className='w-full text-black p-5 flex-shrink-0 cursor-pointer mx-2'
+              className='w-full  p-5 flex-shrink-0 cursor-pointer mx-2'
             >
               <h1 className='text-xl'>Name: {movie.author_details.username}</h1>
               <p className='mt-2'>Rating: {movie.author_details.rating}</p>

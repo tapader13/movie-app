@@ -1,6 +1,8 @@
+import AddFavoriteButton from '@/components/AddFavoriteButton';
 import Carosol from '@/components/Carosol';
 import ReviewCarosol from '@/components/ReviewCarosol';
 import {
+  addFavorite,
   images,
   movieDetails,
   options,
@@ -22,6 +24,7 @@ const getImages = async (id: number) => {
   const jsonData = await data.json();
   return jsonData;
 };
+
 const getReview = async (id: number) => {
   const data = await fetch(`${Review}${id}/reviews`, {
     ...options,
@@ -30,37 +33,47 @@ const getReview = async (id: number) => {
   const jsonData = await data.json();
   return jsonData;
 };
+
 const getSimilar = async (id: number) => {
   const data = await fetch(`${similar}${id}/similar`, options);
   const jsonData = await data.json();
   return jsonData.results;
 };
+
 const getRecomandations = async (id: number) => {
   const data = await fetch(`${recomandations}${id}/recommendations`, options);
   const jsonData = await data.json();
   return jsonData.results;
 };
+
 const MovieDetails = async ({ params }: any) => {
   const data = await getMovieDetails(params.id);
   const images = await getImages(params.id);
   const reviews = await getReview(params.id);
   const similar = await getSimilar(params.id);
   const recomandations = await getRecomandations(params.id);
+
   return (
-    <div>
+    <div className='bg-black text-white'>
       <div className='flex flex-row items-start pt-28 container'>
         <div className='w-1/2'>
-          <Image
-            alt={data.title}
-            width={400}
-            height={200}
-            src={`https://image.tmdb.org/t/p/w500${
-              data.poster_path || data.backdrop_path
-            }`}
-            className='rounded-lg'
-          />
+          {data.poster_path || data.backdrop_path ? (
+            <Image
+              alt={data.title}
+              width={400}
+              height={200}
+              src={`https://image.tmdb.org/t/p/w500${
+                data.poster_path || data.backdrop_path
+              }`}
+              className='rounded-lg'
+            />
+          ) : (
+            <div className='w-full h-full flex items-center justify-center text-white'>
+              No Image Available
+            </div>
+          )}
         </div>
-        <div className='w-1/2 flex flex-col justify-center text-black'>
+        <div className='w-1/2 flex flex-col justify-center'>
           <h1 className='text-4xl font-bold mb-4'>{data.original_title}</h1>
           <p className='text-lg mb-4'>{data.overview}</p>
           <p className='text-md mb-2'>
@@ -72,15 +85,20 @@ const MovieDetails = async ({ params }: any) => {
           <p className='text-md mb-2'>
             <strong>Rating:</strong> {data.vote_average}
           </p>
+          <AddFavoriteButton movieId={params.id} movieDetails={data} />
           <p className='text-md mb-2'>
             <strong>Genres:</strong>{' '}
-            {data.genres.map((genre: any) => genre.name).join(', ')}
+            {data.genres && data.genres.length > 0
+              ? data.genres.map((genre: any) => genre.name).join(', ')
+              : 'N/A'}
           </p>
           <p className='text-md mb-2'>
-            <strong>Budget:</strong> ${data.budget.toLocaleString()}
+            <strong>Budget:</strong> $
+            {data.budget ? data.budget.toLocaleString() : 'N/A'}
           </p>
           <p className='text-md'>
-            <strong>Revenue:</strong> ${data.revenue.toLocaleString()}
+            <strong>Revenue:</strong> $
+            {data.revenue ? data.revenue.toLocaleString() : 'N/A'}
           </p>
           <span className='mt-2 font-extrabold'>Reviews:</span>
           <ReviewCarosol data={reviews.results} />
@@ -89,7 +107,7 @@ const MovieDetails = async ({ params }: any) => {
       <div className='ml-5'>
         <h1 className='text-2xl font-bold py-3'>Images</h1>
         <div className='flex flex-wrap gap-3'>
-          {images.backdrops.length > 0
+          {images.backdrops && images.backdrops.length > 0
             ? images.backdrops
                 .slice(0, 10)
                 .map((image: any, index: number) => (

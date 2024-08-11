@@ -45,25 +45,33 @@ const Carosol = ({ data }: CarosolProps) => {
   return (
     <div className=' w-full'>
       <Carousel responsive={responsive}>
-        {data.map((movie: Movie) => (
-          <Link href={`/moviedetails/${movie.id}`} key={movie.id}>
-            <div className='w-56 flex-shrink-0 cursor-pointer mx-2'>
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${
-                  movie.poster_path || movie.backdrop_path
-                }`}
-                alt={movie.title}
-                width={100}
-                height={100}
-                className='w-full h-64 object-cover rounded-md'
-              />
-              <h2 className='text-white  text-xl font-bold my-2'>
-                {movie.title}
-              </h2>
-              <p className='text-white/50 text-sm'>{movie.release_date}</p>
-            </div>
-          </Link>
-        ))}
+        {data &&
+          data.map((movie: Movie) => (
+            <Link href={`/moviedetails/${movie.id}`} key={movie.id}>
+              <div className='w-56 flex-shrink-0 cursor-pointer mx-2'>
+                {movie.poster_path ? (
+                  <Image
+                    alt={movie.title}
+                    width={400}
+                    height={200}
+                    src={`https://image.tmdb.org/t/p/w500${
+                      movie.poster_path || movie.backdrop_path
+                    }`}
+                    className='w-full h-64 object-cover rounded-md'
+                  />
+                ) : (
+                  <div className='w-full h-full  flex items-center justify-center text-white'>
+                    No Image Available
+                  </div>
+                )}
+
+                <h2 className='text-white  text-xl font-bold my-2'>
+                  {movie.title}
+                </h2>
+                <p className='text-white/50 text-sm'>{movie.release_date}</p>
+              </div>
+            </Link>
+          ))}
       </Carousel>
     </div>
   );
