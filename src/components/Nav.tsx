@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SearchBar from './SearchBar';
 
 const Nav = () => {
   return (
@@ -10,12 +11,12 @@ const Nav = () => {
           </Link>
         </div>
         <div className='flex items-center justify-between gap-10'>
-          <Link className=' text-xl text-primary ' href={'/movies'}>
-            Movies
+          <Link className=' text-xl text-primary ' href={'/genre'}>
+            Genre
           </Link>
-          <Link className=' text-xl text-primary ' href={'/tvshows'}>
-            TV Shows
-          </Link>
+          <div>
+            <SearchBar />
+          </div>
           <Link className=' text-xl text-primary ' href={'/favoritemovies'}>
             Favorite Movies
           </Link>

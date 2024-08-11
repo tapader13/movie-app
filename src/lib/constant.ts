@@ -31,3 +31,6 @@ export const recomandations = 'https://api.themoviedb.org/3/movie/';
 export const latest = 'https://api.themoviedb.org/3/movie/latest';
 export const addFavorite = 'https://api.themoviedb.org/3/account/';
 export const getFavoriteMovies = 'https://api.themoviedb.org/3/account/';
+export const searchMovies = 'https://api.themoviedb.org/3/search/movie';
+export const genre = 'https://api.themoviedb.org/3/genre/movie/list';
+export const genremovie = 'https://api.themoviedb.org/3/discover/movie';

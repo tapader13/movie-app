@@ -22,6 +22,7 @@ const Login = () => {
     // Handle the result
     if (result.success) {
       localStorage.setItem('accountId', result.accountId);
+      console.log(result.sessionId);
       console.log('Logged in successfully and stored sessionId and accountId');
       router.push('/');
     } else {
@@ -31,9 +32,9 @@ const Login = () => {
   };
 
   return (
-    <div className='w-full h-screen flex items-center justify-center'>
-      <form onSubmit={handleSubmit}>
-        <div className='flex gap-4 items-center'>
+    <div className='w-full h-screen flex bg-black text-white items-center justify-center'>
+      <form className='bg-slate-400/20 p-5 rounded-3xl' onSubmit={handleSubmit}>
+        <div className='flex  gap-4 items-center'>
           <Label className='font-extrabold text-xl' htmlFor='username'>
             UserName
           </Label>
