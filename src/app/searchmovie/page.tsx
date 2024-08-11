@@ -1,35 +1,49 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { Movie } from '@/components/AiringToday';
 import { options, searchMovies } from '@/lib/constant';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
 
 const SearchMovie = () => {
-  const params = useSearchParams().get('q');
   const [data, setData] = useState<Movie[]>([]);
+  const [query, setQuery] = useState<string | null>(null);
 
   useEffect(() => {
-    const searchMovie = async () => {
-      if (!params) return;
+    // Get query parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('q');
+    setQuery(queryParam);
 
-      const response = await fetch(`${searchMovies}?query=${params}`, options);
-      const jsonData = await response.json();
-      setData(jsonData.results);
-    };
+    if (queryParam) {
+      const searchMovie = async () => {
+        try {
+          const response = await fetch(
+            `${searchMovies}?query=${queryParam}`,
+            options
+          );
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const jsonData = await response.json();
+          setData(jsonData.results);
+        } catch (error) {
+          console.error('Error fetching search results:', error);
+        }
+      };
 
-    searchMovie();
-  }, [params]);
+      searchMovie();
+    }
+  }, []);
 
   return (
     <div className='p-24 bg-black text-white'>
-      <h1 className='text-3xl font-bold  mb-6'>
-        {params ? `Search Results for: ${params}` : 'Search Results'}
+      <h1 className='text-3xl font-bold mb-6'>
+        {query ? `Search Results for: ${query}` : 'Search Results'}
       </h1>
 
       <div className='container'>
         {data?.map((movie) => (
-          <div key={movie.id} className='flex bg-gray-800  my-5 p-4 rounded-lg'>
+          <div key={movie.id} className='flex bg-gray-800 my-5 p-4 rounded-lg'>
             <Image
               src={`https://image.tmdb.org/t/p/w500/${
                 movie.poster_path || movie.backdrop_path
@@ -37,7 +51,7 @@ const SearchMovie = () => {
               alt={movie.title}
               height={200}
               width={200}
-              className=' object-cover rounded-lg'
+              className='object-cover rounded-lg'
             />
             <div className='ml-6 flex flex-col justify-center'>
               <h2 className='text-3xl font-bold mb-2'>{movie.title}</h2>
